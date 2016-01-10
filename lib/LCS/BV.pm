@@ -1,5 +1,5 @@
 use v6;
-module Algorithm::LCS:ver<0.1.0>:auth<wollmers> {
+module LCS::BV:ver<0.1.0>:auth<wollmers> {
 
 my int $width = 64;
 
