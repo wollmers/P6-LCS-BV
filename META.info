@@ -1,4 +1,5 @@
 {
+    "perl" : "6.*",
     "name": "LCS::BV",
     "version": "0.1.0",
     "description": "Bit Vector implementation of the Longest Common Subsequence Algorithm",
