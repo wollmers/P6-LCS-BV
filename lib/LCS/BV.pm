@@ -1,5 +1,5 @@
 use v6;
-module LCS::BV:ver<0.1.0>:auth<wollmers> {
+module LCS::BV:ver<0.2.0>:auth<wollmers> {
 
 my int $width = 64;
 
@@ -8,9 +8,24 @@ my int $width = 64;
 # of Computer Science and Engineering, Faculty of Electrical
 # Engineering, Czech Technical University, 2004.
 
+#our sub bug($a, $b) is export {
+our sub bug($a) is export { say $a," ",$a.elems - 1; }
+
 our sub LCS($a, $b) is export {
 
-  my int ($amin, $amax, $bmin, $bmax) = (0, @($a)-1, 0, @($b)-1);
+  my $amin = 0;
+  my $amax = $a.elems - 1;
+  my $bmin = 0;
+  my $bmax = $b.elems - 1;
+
+  if (0) {
+    say '$a: ',$a;
+    say '$b: ',$b;
+    say '$amin: ',$amin;
+    say '$amax: ',$amax;
+    say '$bmin: ',$bmin;
+    say '$bmax: ',$bmax;
+  }
 
   while ($amin <= $amax and $bmin <= $bmax and $a[$amin] eqv $b[$bmin]) {
     $amin++;
@@ -44,12 +59,12 @@ our sub LCS($a, $b) is export {
     my $i = $amax;
     my $j = $bmax;
 
-    while ($i >= $amin & $j >= $bmin) {
+    while ($i >= $amin && $j >= $bmin) {
       if ($Vs[$j] +& (1 +< $i)) {
         $i--;
       }
       else {
-        unless ($j & +^$Vs[$j-1] +& (1 +< $i)) {
+        unless ($j && +^$Vs[$j-1] +& (1 +< $i)) {
            unshift @lcs, [$i,$j];
            $i--;
         }
