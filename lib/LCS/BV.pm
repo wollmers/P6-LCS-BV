@@ -125,6 +125,8 @@ our sub LCS($a, $b) is export {
 
 }
 
+=begin pod
+
 =head1 NAME
 
 LCS::BV - Bit Vector (BV) implementation of the
@@ -194,3 +196,5 @@ Helmut Wollmersdorfer E<lt>helmut.wollmersdorfer@gmail.comE<gt>
 <a href='http://cpants.cpanauthors.org/author/wollmers'><img src='http://cpants.cpanauthors.org/author/wollmers.png' alt='Kwalitee Score' /></a>
 
 =end html
+
+=end pod
