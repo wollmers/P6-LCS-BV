@@ -125,3 +125,72 @@ our sub LCS($a, $b) is export {
 
 }
 
+=head1 NAME
+
+LCS::BV - Bit Vector (BV) implementation of the
+                 Longest Common Subsequence (LCS) Algorithm
+
+=begin html
+
+<a href="https://travis-ci.org/wollmers/P6-LCS-BV"><img src="https://travis-ci.org/wollmers/P6-LCS-BV.png" alt="P6-LCS-BV"></a>
+
+=end html
+
+=head1 SYNOPSIS
+
+=begin code
+  use LCS::BV;
+
+  $alg = LCS::BV->new;
+  @lcs = $alg->LCS(\@a,\@b);
+=end code
+
+=head1 ABSTRACT
+
+LCS::BV implements the Longest Common Subsequence (LCS) Algorithm and should
+be faster than Algorithm::Diff or Algorithm::Diff.
+
+=head1 DESCRIPTION
+
+=head2 CONSTRUCTOR
+
+=over 4
+
+=item new()
+
+Creates a new object which maintains internal storage areas
+for the LCS computation.  Use one of these per concurrent
+LCS() call.
+
+=back
+
+=head2 METHODS
+
+=over 4
+
+
+=item LCS(\@a,\@b)
+
+Finds a Longest Common Subsequence, taking two arrayrefs as method
+arguments. It returns an array reference of corresponding
+indices, which are represented by 2-element array refs.
+
+=back
+
+=head2 EXPORT
+
+None by design.
+
+=head1 SEE ALSO
+
+Algorithm::Diff
+
+=head1 AUTHOR
+
+Helmut Wollmersdorfer E<lt>helmut.wollmersdorfer@gmail.comE<gt>
+
+=begin html
+
+<a href='http://cpants.cpanauthors.org/author/wollmers'><img src='http://cpants.cpanauthors.org/author/wollmers.png' alt='Kwalitee Score' /></a>
+
+=end html
