@@ -63,6 +63,7 @@ my $examples = [
     '_bcdefgh'],
   [ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVY_',
     '_bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVYZ'],
+# TODO
   [ 'abcdefghijklmnopqrstuvwxyz01234567890123456789ABCDEFGHIJKLMNOPQRSTUVY_',
     '_bcdefghijklmnopqrstuvwxyz01234567890123456789ABCDEFGHIJKLMNOPQRSTUVYZ'],
 ];
@@ -85,11 +86,11 @@ ok(any_of($[[0,1],[2,3],], $[[[0,1],[2,3],],[[0,1],[2,4],]]),
 
 if (1) {
 for  (@$examples) -> $example {
-#for ($examples[3]) -> $example {
+#for ($examples[27]) -> $example {
   my $a = $example[0];
   my $b = $example[1];
   my $A = [$a.comb(/<-[_]>/)];
-  my $B = [$a.comb(/<-[_]>/)];
+  my $B = [$b.comb(/<-[_]>/)];
 
   if (0) {
   say '$A: ', $A;
@@ -117,7 +118,7 @@ for ($examples[1]) -> $example {
   my $a = $example[0];
   my $b = $example[1];
   my $A = [$a.comb(/<-[_]>/)];
-  my $B = [$a.comb(/<-[_]>/)];
+  my $B = [$b.comb(/<-[_]>/)];
 
   say '$A: ', $A;
   say '$B: ', $B;

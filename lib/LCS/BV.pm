@@ -1,5 +1,5 @@
 use v6;
-module LCS::BV:ver<0.2.0>:auth<wollmers> {
+module LCS::BV:ver<0.3.0>:auth<wollmers> {
 
 my int $width = 64;
 
@@ -8,24 +8,12 @@ my int $width = 64;
 # of Computer Science and Engineering, Faculty of Electrical
 # Engineering, Czech Technical University, 2004.
 
-#our sub bug($a, $b) is export {
-our sub bug($a) is export { say $a," ",$a.elems - 1; }
-
 our sub LCS($a, $b) is export {
 
   my $amin = 0;
   my $amax = $a.elems - 1;
   my $bmin = 0;
   my $bmax = $b.elems - 1;
-
-  if (0) {
-    say '$a: ',$a;
-    say '$b: ',$b;
-    say '$amin: ',$amin;
-    say '$amax: ',$amax;
-    say '$bmin: ',$bmin;
-    say '$bmax: ',$bmax;
-  }
 
   while ($amin <= $amax and $bmin <= $bmax and $a[$amin] eqv $b[$bmin]) {
     $amin++;
@@ -50,12 +38,12 @@ our sub LCS($a, $b) is export {
     # outer loop
     for ($bmin..$bmax) -> $j {
       $y = $positions{$b[$j]} // 0;
-      $u = $S +& $y;               # [Hyy04]
-      $S = ($S + $u) +| ($S - $u); # [Hyy04]
+      $u = $S +& $y;               # [Hyy04a]
+      $S = ($S + $u) +| ($S - $u); # [Hyy04a]
       $Vs[$j] = $S;
     }
 
-    # recover alignment
+    # recover alignment [Hyy04b]
     my $i = $amax;
     my $j = $bmax;
 
@@ -98,13 +86,13 @@ our sub LCS($a, $b) is export {
     my $i = $amax;
     my $j = $bmax;
 
-    while ($i >= $amin & $j >= $bmin) {
+    while ($i >= $amin && $j >= $bmin) {
       my $k = $i / $width;
       if ($Vs[$j][$k] +& (1 +< ($i % $width))) {
         $i--;
       }
       else {
-        unless ($j & +^$Vs[$j-1][$k] +& (1 +< ($i % $width))) {
+        unless ($j && +^$Vs[$j-1][$k] +& (1 +< ($i % $width))) {
            unshift @lcs, [$i,$j];
            $i--;
         }
@@ -141,47 +129,37 @@ LCS::BV - Bit Vector (BV) implementation of the
 =head1 SYNOPSIS
 
 =begin code
+
   use LCS::BV;
 
-  $alg = LCS::BV->new;
-  @lcs = $alg->LCS(\@a,\@b);
+  $lcs = LCS::BV::LCS($a,$b);
+
 =end code
 
 =head1 ABSTRACT
 
-LCS::BV implements the Longest Common Subsequence (LCS) Algorithm and should
-be faster than Algorithm::Diff or Algorithm::Diff.
+LCS::BV implements the Longest Common Subsequence (LCS) Algorithm and is
+more than double as fast (Jan 2016) than Algorithm::Diff::LCSidx().
 
 =head1 DESCRIPTION
 
-=head2 CONSTRUCTOR
+This module is a port from the Perl5 module with the same name.
 
-=over 4
+The algorithm used is based on
 
-=item new()
-
-Creates a new object which maintains internal storage areas
-for the LCS computation.  Use one of these per concurrent
-LCS() call.
-
-=back
+  H. Hyyroe. A Note on Bit-Parallel Alignment Computation. In
+  M. Simanek and J. Holub, editors, Stringology, pages 79-87. Department
+  of Computer Science and Engineering, Faculty of Electrical
+  Engineering, Czech Technical University, 2004.
 
 =head2 METHODS
 
-=over 4
-
-
-=item LCS(\@a,\@b)
+=item LCS($a,$b)
 
 Finds a Longest Common Subsequence, taking two arrayrefs as method
 arguments. It returns an array reference of corresponding
 indices, which are represented by 2-element array refs.
 
-=back
-
-=head2 EXPORT
-
-None by design.
 
 =head1 SEE ALSO
 
@@ -190,11 +168,5 @@ Algorithm::Diff
 =head1 AUTHOR
 
 Helmut Wollmersdorfer E<lt>helmut.wollmersdorfer@gmail.comE<gt>
-
-=begin html
-
-<a href='http://cpants.cpanauthors.org/author/wollmers'><img src='http://cpants.cpanauthors.org/author/wollmers.png' alt='Kwalitee Score' /></a>
-
-=end html
 
 =end pod
