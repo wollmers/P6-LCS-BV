@@ -112,20 +112,5 @@ for  (@$examples) -> $example {
 }
 }
 
-if (0) {
-#for  (@$examples) -> $example {
-for ($examples[1]) -> $example {
-  my $a = $example[0];
-  my $b = $example[1];
-  my $A = [$a.comb(/<-[_]>/)];
-  my $B = [$b.comb(/<-[_]>/)];
-
-  say '$A: ', $A;
-  say '$B: ', $B;
-  say 'bug: ', bug($A);
-  #say 'bug: ', bug($A, $B);
-
-}
-}
 
 done-testing;
