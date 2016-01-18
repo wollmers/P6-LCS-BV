@@ -14,9 +14,8 @@ module LCS::BV:ver<0.4.0>:auth<wollmers> {
       $bmax--;
     }
 
-    my $width = $a.elems;
     my $positions;
-    $positions{$a[$_]} +|= 1 +< ($_ % $width) for $amin..$amax;
+    $positions{$a[$_]} +|= 1 +< $_  for $amin..$amax;
 
     my $S = +^0;
     my $Vs = [];

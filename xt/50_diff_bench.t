@@ -5,7 +5,7 @@ use v6;
 my $A = ['Chrerrplzon'.comb(/<-[_]>/)];
 my $B = ['Choerephon'.comb(/<-[_]>/)];
 
-my $count = 10000;
+my $count = 1000;
 
 if (1) {
   use LCS::BV;
@@ -20,7 +20,7 @@ if (1) {
 }
 
 
-if (1) {
+if (0) {
   use Algorithm::Diff;
   my $startime = time;
     for (1..$count) {
@@ -35,7 +35,7 @@ if (1) {
 $A = ['ChrerrplzonChrerrplzon'.comb(/<-[_]>/)];
 $B = ['ChoerephonChoerephon'.comb(/<-[_]>/)];
 
-if (1) {
+if (0) {
   use LCS::BV;
   my $startime = time;
     for (1..$count) {
@@ -48,7 +48,7 @@ if (1) {
 }
 
 
-if (1) {
+if (0) {
   use Algorithm::Diff;
   my $startime = time;
     for (1..$count) {
